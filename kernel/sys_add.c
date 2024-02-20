@@ -2,6 +2,10 @@
 #include "riscv.h"
 #include "defs.h"
 
-int sys_add(int arg1, int arg2) {
+uint64 sys_add(void) {
+	int arg1, arg2;
+	argint(0, &arg1);
+	argint(1, &arg2);
+
 	return arg1 + arg2;
 }

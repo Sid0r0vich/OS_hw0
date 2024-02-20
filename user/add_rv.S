@@ -18,16 +18,18 @@ debug_msg: .asciz "debug\n"
 .global main
 
 main:
+	# читаем всю строку
     la a0, buff
     li a1, BUFF_LEN
     call gets
 
+	# разбиваем по пробелу
     la a0, buff
     li a1, SPACE
     call strchr
     move s3, a0
 
-    # errors
+    # обрабатываем ошибки
 	bne s3, x0, pass_error1
 	li a0, 2
 	la a1, error1_msg
@@ -109,11 +111,13 @@ break:
 	jal exit
 
 pass_error4:
-    
+
+    # ставим нулевой символ между строками
     li s4, STREND
     sb s4, 0(s3)
     addi s3, s3, 1
 
+	# парсим числа и выводим на экран
     la a0, buff
     call atoi
     move s0, a0
@@ -128,6 +132,7 @@ pass_error4:
     move a1, s2
     call printf
 
+	# выход
     li a7, 2
     li a0, 0
     ecall

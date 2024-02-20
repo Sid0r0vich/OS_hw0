@@ -28,5 +28,7 @@ void my_add(char* buff) {
     int d1 = atoi(buff);
     int d2 = atoi(p + 1);
 
-    printf("%d\n", d1 + d2);
+	int res = add(d1, d2);
+	
+    printf("%d\n", res);
 }
