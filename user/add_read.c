@@ -2,7 +2,7 @@
 #include "kernel/stat.h"
 #include "user/user.h"
 
-#include "user/my_add.h"
+#include "user/my_add.c"
 
 #define LEN 24
 
@@ -14,7 +14,7 @@ int main(int argc, char *argv[]) {
     char c;
     for (int i = 0; i < LEN - 1; ++i) {
     	n = read(0, &c, 1);
-    	if (n < 0) break;
+    	if (n <= 0) break;
     	buff[i] = c;
     	if (c == '\n' || c == '\r') {
     	    buff[i] = '\n';
@@ -23,11 +23,13 @@ int main(int argc, char *argv[]) {
     }
    
     if (n < 0) {
-    	printf("Read error!");
+    	fprintf(2, "Read error!");
     	return 0;
     }
 
-    *strchr(buff, (int)'\n') = '\0';
+    if (n > 0) *strchr(buff, (int)'\n') = '\0';
+    else printf("\n");
+    
     my_add(buff);
 
     return 0;

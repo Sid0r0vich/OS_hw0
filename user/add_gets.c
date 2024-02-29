@@ -2,7 +2,7 @@
 #include "kernel/stat.h"
 #include "user/user.h"
 
-#include "user/my_add.h"
+#include "user/my_add.c"
 
 int main(int argc, char *argv[]) {
     char buff[BUFF_LEN];
